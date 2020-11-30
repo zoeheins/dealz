@@ -7,11 +7,15 @@ function HomePage({ message }) {
 export async function getStaticProps() {
   let message;
 
+  const url = `${baseUrl}/api/hello`;
+  console.log('requesting:', url);
+
   try {
-    const res = await fetch(`${baseUrl}/api/hello`);
+    const res = await fetch(url);
     const json = await res.json();
     message = json.message;
   } catch (err) {
+    console.log('error: ', err)
     message = 'error message';
   }
 
