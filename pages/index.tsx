@@ -1,6 +1,6 @@
-import { baseUrl } from './config';
+import { baseUrl } from '../config';
 
-const HomePage = ({ message }) => {
+function HomePage({ message }) {
   return <div>message from the backend: {message}</div>;
 }
 
