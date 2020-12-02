@@ -4,7 +4,7 @@ function HomePage({ message }) {
   return <div>message from the backend: {message}</div>;
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   let message;
 
   const url = `${baseUrl}/api/hello`;
