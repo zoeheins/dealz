@@ -4,7 +4,7 @@ on:
     - cron: '* * * * *'
 jobs:
   cron:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Call Hello API route
-    - run: curl https://dealz.vercel.app/api/hello
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Hello API route
+        run: curl https://dealz.vercel.app/api/hello
