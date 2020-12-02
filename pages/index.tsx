@@ -1,27 +1,31 @@
 import { baseUrl } from '../config';
 
-function HomePage({ message }) {
-  return <div>message from the backend: {message}</div>;
+function HomePage({ products }) {
+  return (
+    <div>
+      <h4>Tracked Products:</h4>
+      {products.map(product => (
+        <p key={product._id}>Item name: {product.nickname} </p>
+      ))}
+    </div>
+  );
 }
 
 export async function getServerSideProps() {
-  let message;
+  let products;
 
-  const url = `${baseUrl}/api/hello`;
-  console.log('requesting:', url);
-
+  const url = `${baseUrl}/api/products`;
   try {
     const res = await fetch(url);
     const json = await res.json();
-    message = json.message;
+    products = json.products;
   } catch (err) {
-    console.log('error: ', err)
-    message = 'error message';
+    console.log('error: ', err);
   }
 
   return {
     props: {
-      message,
+      products,
     },
   };
 }
