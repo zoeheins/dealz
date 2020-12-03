@@ -1,11 +1,23 @@
-import connectToDatabase from '../connectToDatabase';
+import getProductPrice from '../../services/scraper';
 
 const handler = async (req, res) => {
-  const db = await connectToDatabase();
-  const collection = await db.collection('products');
-  const products = await collection.find({}).toArray();
+  const products = [
+    {
+      _id: 1,
+      nickname: 'slip dress',
+      url:
+        'https://www.freepeople.com/shop/bring-it-back-printed-slip/?color=086&type=REGULAR&quantity=1',
+    },
+  ];
 
-  res.status(200).json({ products });
+  const pricedProducts = await Promise.all(
+    products.map(async product => {
+      const price = await getProductPrice(product.url);
+      return { ...product, price}
+    })
+  )
+
+  res.status(200).json({ products: pricedProducts });
 };
 
 export default handler;
