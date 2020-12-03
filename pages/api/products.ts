@@ -4,9 +4,9 @@ const handler = async (req, res) => {
   const products = [
     {
       _id: 1,
-      nickname: 'slip dress',
+      nickname: 'pots',
       url:
-        'https://www.freepeople.com/shop/bring-it-back-printed-slip/?color=086&type=REGULAR&quantity=1',
+        'https://smile.amazon.com/dp/B083Q8V5TB/?coliid=I2D3HG3D1Y5R6K&colid=TSXFAOTD35NU&psc=1&ref_=lv_ov_lig_dp_it',
     },
   ];
 
