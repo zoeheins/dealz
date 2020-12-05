@@ -12,11 +12,11 @@ const getProductPrice = async (url: string) => {
 
     const regex = /Price:\$(\d*.\d*)/;
     const priceText = stripped.match(regex)[1];
-
     return parseFloat(priceText);
+
   } catch (err) {
     console.log('error getting price', err);
-    return 'could not find price';
+    return null;
   }
 };
 

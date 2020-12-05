@@ -1,18 +1,12 @@
 import { baseUrl } from '../config';
 
-type Product = {
-  url: string;
-  nickname: string;
-  price?: number | string;
-}
-
 function HomePage({ products }) {
   return (
     <div>
       <h4>Tracked Products:</h4>
       {products.map(product => (
         <p key={product._id}>
-          {product.nickname}: ${product.price}
+          {product.nickname}: ${product.price || 'couldnt find price'}
         </p>
       ))}
     </div>
