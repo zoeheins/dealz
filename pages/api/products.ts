@@ -1,18 +1,19 @@
 import getProductPrice from '../../services/scraper';
+import connectToDatabase from '../connectToDatabase';
 
 const handler = async (req, res) => {
-  const products = [
-    {
-      _id: 1,
-      nickname: 'pots',
-      url:
-        'https://smile.amazon.com/dp/B083Q8V5TB/?coliid=I2D3HG3D1Y5R6K&colid=TSXFAOTD35NU&psc=1&ref_=lv_ov_lig_dp_it',
-    },
-  ];
+  const db = await connectToDatabase();
+  const collection = await db.collection('products');
+  const products = await collection.find({}).toArray();
+
+  console.log('tracked products:', products)
 
   const pricedProducts = await Promise.all(
     products.map(async product => {
-      const price = await getProductPrice(product.url);
+      let price: number | string = await getProductPrice(product.url);
+      if (!price) {
+        price = 'could not find price'
+      }
       return { ...product, price}
     })
   )
