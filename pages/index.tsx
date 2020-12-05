@@ -1,18 +1,26 @@
 import { baseUrl } from '../config';
 
+type Product = {
+  url: string;
+  nickname: string;
+  price?: number | string;
+}
+
 function HomePage({ products }) {
   return (
     <div>
       <h4>Tracked Products:</h4>
       {products.map(product => (
-        <p key={product._id}>{product.nickname}: ${product.price}</p>
+        <p key={product._id}>
+          {product.nickname}: ${product.price}
+        </p>
       ))}
     </div>
   );
 }
 
 export async function getServerSideProps() {
-  let products;
+  let products: Product[];
 
   const url = `${baseUrl}/api/products`;
   try {
