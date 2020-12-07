@@ -1,12 +1,7 @@
 import getProductPrice from './getProductPrice';
 import connectToDatabase from '../connectToDatabase';
+import { Product } from '../types';
 
-type Product = {
-  _id: string;
-  url: string;
-  nickname: string;
-  price?: number | string;
-};
 
 const getProductPrices = async () => {
   const db = await connectToDatabase();

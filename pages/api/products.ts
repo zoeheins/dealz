@@ -1,9 +1,10 @@
 import connectToDatabase from '../../connectToDatabase';
+import { Product } from '../../types';
 
 const handler = async (req, res) => {
   const db = await connectToDatabase();
   const collection = await db.collection('products');
-  const products = await collection.find({}).toArray();
+  const products: Product[] = await collection.find({}).toArray();
 
   res.status(200).json({ products });
 };

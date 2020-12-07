@@ -1,4 +1,5 @@
 import { baseUrl } from '../config';
+import { Product } from '../types';
 
 function HomePage({ products }) {
   return (
