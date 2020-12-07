@@ -1,6 +1,6 @@
 import getProductPrice from './getProductPrice';
-import connectToDatabase from '../connectToDatabase';
-import { Product } from '../types';
+import connectToDatabase from '~/connectToDatabase';
+import { Product } from '~/types';
 
 
 const getProductPrices = async () => {

@@ -13,6 +13,10 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./*"]
+    },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": false,
