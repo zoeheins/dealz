@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import connectToDatabase from '~/connectToDatabase';
-import { Product } from '~/types';
+import connectToDatabase from '~/utils/connectToDatabase';
+import { Product } from '~/utils/types';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const db = await connectToDatabase();

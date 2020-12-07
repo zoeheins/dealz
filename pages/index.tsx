@@ -1,5 +1,5 @@
-import { baseUrl } from '~/config';
-import { Product } from '~/types';
+import { baseUrl } from '~/utils/config';
+import { Product } from '~/utils/types';
 
 function HomePage({ products }) {
   return (
