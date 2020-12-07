@@ -5,6 +5,7 @@ const handler = async (req, res) => {
     await getProductPrices();
     res.send(200);
   } catch (err) {
+    console.log('Error getting products prices:', err);
     res.send(500);
   }
 };

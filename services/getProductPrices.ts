@@ -15,6 +15,8 @@ const getProductPrices = async () => {
   // add typing
   const products: Product[] = await collection.find({}).toArray();
 
+  console.log('Products from DB:', products);
+
   await Promise.all(
     products.map(async product => {
       let price: number | null = await getProductPrice(product.url);
