@@ -7,7 +7,11 @@ function HomePage({ products }) {
       <h4>Tracked Products:</h4>
       {products.map(product => (
         <p key={product._id}>
-          {product.nickname}: ${product.price || 'couldnt find price'}
+          {product.nickname}: { product.price ? (
+            `$${product.price}`
+          ):(
+            'couldnt find price'
+          )}
         </p>
       ))}
     </div>
