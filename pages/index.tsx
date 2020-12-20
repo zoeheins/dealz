@@ -6,13 +6,15 @@ import ProductComponent from 'components/product';
 function HomePage({ error, products }) {
   return (
     <div>
-      <h4>Tracked Products:</h4>
       {error ? (
         <p>{error}</p>
       ) : (
-        products.map(product => (
-          <ProductComponent product={product} key={product._id} />
-        ))
+        <div>
+          <h4>Tracked Products:</h4>
+          {products.map(product => (
+            <ProductComponent product={product} key={product._id} />
+          ))}
+        </div>
       )}
     </div>
   );
@@ -25,7 +27,9 @@ export async function getServerSideProps() {
   const url = `${baseUrl}/api/products`;
   const res = await fetch(url);
   const json = await res.json();
-  if (!json.products) {
+  if (json.products) {
+    products = json.products;
+  } else {
     error = 'Error fetching products';
   }
 

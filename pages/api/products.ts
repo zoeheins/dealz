@@ -19,7 +19,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       _id: 123,
       url: 'fake-url.com',
       nickname: 'fake item',
-      price: '$1',
+      price: 1,
     },
   ];
   res.status(200).json({ products });
