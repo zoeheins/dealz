@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Product } from '~/utils/types';
 
@@ -7,12 +7,12 @@ interface ProductProps {
 }
 
 const ProductComponent: React.FC<ProductProps> = ({ product }) => {
+  const [price, setPrice] = useState(product.price);
   return (
     <p>
       <>
-        {product.nickname}:{' '}
-        {product.price ? `$${product.price}` : 'couldnt find price'}{' '}
-        <button>find latest price</button>
+        {product.nickname}: {price ? `$${price}` : 'couldnt find price'}{' '}
+        <button onClick={() => setPrice(1)}>Set price to $1</button>
       </>
     </p>
   );
