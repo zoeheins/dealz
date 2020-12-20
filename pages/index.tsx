@@ -24,12 +24,15 @@ export async function getServerSideProps() {
   let error = null;
   let products: Product[] = [];
 
-  const url = `${baseUrl}/api/products`;
-  const res = await fetch(url);
-  const json = await res.json();
-  if (json.products) {
-    products = json.products;
-  } else {
+  try {
+    const url = `${baseUrl}/api/products`;
+    const res = await fetch(url);
+    const json = await res.json();
+    if (json.products) {
+      products = json.products;
+    }
+  } catch (err) {
+    console.log(err);
     error = 'Error fetching products';
   }
 
