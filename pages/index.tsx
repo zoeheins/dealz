@@ -1,18 +1,14 @@
 import { baseUrl } from '~/utils/config';
 import { Product } from '~/utils/types';
 
+import ProductComponent from 'components/product';
+
 function HomePage({ products }) {
   return (
     <div>
       <h4>Tracked Products:</h4>
       {products.map(product => (
-        <p key={product._id}>
-          {product.nickname}: { product.price ? (
-            `$${product.price}`
-          ):(
-            'couldnt find price'
-          )}
-        </p>
+        <ProductComponent product={product} key={product._id} />
       ))}
     </div>
   );
