@@ -14,6 +14,8 @@ const connectToDatabase = async () => {
     return cachedDb;
   }
 
+  console.log('My MongoDB URI:', MONGODB_URI)
+
   // If no connection is cached, create a new one
   const client = await MongoClient.connect(MONGODB_URI, {
     useNewUrlParser: true,

@@ -32,7 +32,7 @@ export async function getServerSideProps() {
       products = json.products;
     }
   } catch (err) {
-    console.log(err);
+    console.log('Error from api:', err);
     error = 'Error fetching products';
   }
 
