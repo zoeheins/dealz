@@ -1,7 +1,8 @@
-import { baseUrl } from '~/utils/config';
-import { Product } from '~/utils/types';
+import { baseUrl } from 'utils/config';
+import { DBProduct } from 'utils/types';
 
-import ProductComponent from 'components/product';
+import AddProductForm from 'components/AddProductForm';
+import Product from 'components/Product';
 
 function HomePage({ error, products }) {
   return (
@@ -12,8 +13,9 @@ function HomePage({ error, products }) {
         <div>
           <h4>Tracked Products:</h4>
           {products.map(product => (
-            <ProductComponent product={product} key={product._id} />
+            <Product product={product} key={product._id} />
           ))}
+          <AddProductForm />
         </div>
       )}
     </div>
@@ -22,7 +24,7 @@ function HomePage({ error, products }) {
 
 export async function getServerSideProps() {
   let error = null;
-  let products: Product[] = [];
+  let products: DBProduct[] = [];
 
   try {
     const url = `${baseUrl}/api/products`;

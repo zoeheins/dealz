@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Product } from '~/utils/types';
+import { DBProduct } from 'utils/types';
 
 interface ProductProps {
-  product: Product;
+  product: DBProduct;
 }
 
 const ProductComponent: React.FC<ProductProps> = ({ product }) => {

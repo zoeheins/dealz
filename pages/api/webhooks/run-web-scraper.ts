@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import updateProductPrices from '~/services/updateProductPrices';
+import updateProductPrices from 'services/updateProductPrices';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   try {

@@ -1,12 +1,13 @@
+import connectToDatabase from 'utils/connectToDatabase';
+import { DBProduct } from 'utils/types';
+
 import getProductPrice from './getProductPrice';
-import connectToDatabase from '~/utils/connectToDatabase';
-import { Product } from '~/utils/types';
 
 const updateProductPrices = async () => {
   const db = await connectToDatabase();
 
   const collection = await db.collection('products');
-  const products: Product[] = await collection.find({}).toArray();
+  const products: DBProduct[] = await collection.find({}).toArray();
 
   console.log('Products from DB:', products);
 
