@@ -1,12 +1,12 @@
-# name: test-cron
-# on:
-#   schedule:
-#     - cron: '* * * * *'
-# jobs:
-#   cron:
-#     runs-on: ubuntu-latest
-#     steps:
-#       - name: Call Hello API route
-#         run: curl https://dealz.vercel.app/api/hello -H "webhook-secret: $SECRET_HEADER"
-#         env:
-#           WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
+name: web scraper cron
+on:
+  schedule:
+    - cron: '*/15 * * * *'  # every 15 mins
+jobs:
+  cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call run scraper webhook
+        run: curl https://dealz.vercel.app/api/webhooks/run-web-scraper -H "secret-header: $SECRET_HEADER"
+        env:
+          WEBHOOK_SECRET: ${{ secrets.WEBHOOK_SECRET }}
