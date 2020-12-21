@@ -2,8 +2,7 @@ import getProductPrice from './getProductPrice';
 import connectToDatabase from '~/utils/connectToDatabase';
 import { Product } from '~/utils/types';
 
-
-const getProductPrices = async () => {
+const updateProductPrices = async () => {
   const db = await connectToDatabase();
 
   const collection = await db.collection('products');
@@ -17,17 +16,19 @@ const getProductPrices = async () => {
 
       console.log(`Found price of $${price} for ${product.nickname}`);
 
-      collection.updateOne(
-        { _id: product._id },
-        { $set: { price } },
-        (err, res) => {
-          if (err) {
-            throw new Error(err);
+      if (price) {
+        collection.updateOne(
+          { _id: product._id },
+          { $set: { price } },
+          (err, res) => {
+            if (err) {
+              throw new Error(err);
+            }
           }
-        }
-      );
+        );
+      }
     })
   );
 };
 
-export default getProductPrices;
+export default updateProductPrices;

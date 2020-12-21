@@ -3,10 +3,10 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import connectToDatabase from '~/utils/connectToDatabase';
 import { Product } from '~/utils/types';
 
-import getProductPrices from '~/services/getProductPrices'
+import updateProductPrices from '~/services/updateProductPrices'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  await getProductPrices()  // update db with latest prices
+  await updateProductPrices()  // update db with latest prices
 
   try {
     const db = await connectToDatabase();
