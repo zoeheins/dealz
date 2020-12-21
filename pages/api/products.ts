@@ -6,7 +6,7 @@ import { DBProduct } from 'utils/types';
 import updateProductPrices from 'services/updateProductPrices'
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  await updateProductPrices()  // update db with latest prices
+  // await updateProductPrices()  // update db with latest prices
 
   try {
     const db = await connectToDatabase();
