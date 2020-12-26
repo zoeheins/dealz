@@ -1,7 +1,7 @@
+import Link from 'next/link'
+
 import { baseUrl } from 'utils/config';
 import { DBProduct } from 'utils/types';
-
-import AddProductForm from 'components/AddProductForm';
 import Product from 'components/Product';
 
 function HomePage({ error, products }) {
@@ -15,7 +15,7 @@ function HomePage({ error, products }) {
           {products.map(product => (
             <Product product={product} key={product._id} />
           ))}
-          <AddProductForm />
+          <Link href="/new">Track a new product</Link>
         </div>
       )}
     </div>
