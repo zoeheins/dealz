@@ -1,5 +1,6 @@
 import cheerio from 'cheerio';
 
+// scrapeProductPrice?
 const getProductPrice = async (url: string) => {
   try {
     const res = await fetch(url);
@@ -11,9 +12,14 @@ const getProductPrice = async (url: string) => {
     console.log('Amazon price text:', stripped);
 
     const regex = /Price:\$(\d*.\d*)/;
-    const priceText = stripped.match(regex)[1];
-    return parseFloat(priceText);
+    const matches = stripped.match(regex);
+    const priceText = matches ? matches[1] : null;
 
+    if (priceText) {
+      return parseFloat(priceText);
+    } else {
+      return null;
+    }
   } catch (err) {
     console.log('error getting price', err);
     return null;

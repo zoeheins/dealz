@@ -1,24 +1,29 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import updateProductPrices from 'services/updateProductPrices';
+import updateProductPrices from 'database/updateProductPrices';
+import alertOnDealz from '~/services/alertOnDeals';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  try {
-    console.log('Recieved webhook request')
+  console.log('Recieved webhook request');
 
-    const headers = req.headers;
-    const secretHeader = headers['secret-header'];
+  const headers = req.headers;
+  const secretHeader = headers['secret-header'];
 
-    if (secretHeader !== process.env.WEBHOOK_SECRET) {
-      res.send(401);
-    } else {
-      updateProductPrices();
-      res.send(200);
-    }
-  } catch (err) {
-    console.log('Error running web scraper:', err);
-    res.send(500);
-  }
+  console.log('recieved header:', secretHeader)
+  console.log('expected header:', process.env.WEBHOOK_SECRET)
+
+  if (secretHeader !== process.env.WEBHOOK_SECRET) {
+    console.log('Missing secret header');
+    res.send(401);
+  } else {
+  // scrape web for current prices and update db
+  updateProductPrices();
+
+  alertOnDealz()
+
+  res.status(200);
+  res.json({ message: 'success' });
+  res.end();
 };
 
 export default handler;

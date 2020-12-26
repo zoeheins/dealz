@@ -1,7 +1,7 @@
-import connectToDatabase from 'utils/connectToDatabase';
+import connectToDatabase from 'database/connectToDatabase';
 import { DBProduct } from 'utils/types';
 
-import getProductPrice from './getProductPrice';
+import getProductPrice from 'services/getProductPrice';
 
 const updateProductPrices = async () => {
   const db = await connectToDatabase();
@@ -15,15 +15,15 @@ const updateProductPrices = async () => {
     products.map(async product => {
       let price: number | null = await getProductPrice(product.url);
 
-      console.log(`Found price of $${price} for ${product.nickname}`);
-
       if (price) {
+        console.log(`Found price of $${price} for ${product.nickname}`);
+
         collection.updateOne(
           { _id: product._id },
           { $set: { price } },
           (err, res) => {
             if (err) {
-              throw new Error(err);
+              throw new Error(err.message as string);
             }
           }
         );

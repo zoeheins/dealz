@@ -1,26 +1,31 @@
-import Link from 'next/link';
-
 import { baseUrl } from 'utils/config';
 import { DBProduct } from 'utils/types';
 import ProductTable from 'components/ProductTable';
+import { Alert, Container } from 'react-bootstrap';
 
-function HomePage({ error, products }) {
-  return (
-    <div>
-      {error ? (
-        <p>{error}</p>
-      ) : (
-        <div>
-          <h4>Tracked Products:</h4>
-          <ProductTable products={products} />
-          <button>
-            <Link href='/new'>Track a new product</Link>
-          </button>
-        </div>
-      )}
-    </div>
-  );
+interface HomePageProps {
+  error?: string;
+  products: DBProduct[];
 }
+
+const HomePage: React.FC<HomePageProps> = ({ error, products }) => {
+  return (
+    <Container>
+      {error ? (
+        <Alert variant='danger'>{error}</Alert>
+      ) : products.length ? (
+        <div>
+          <h4 className='display-4'>Tracked Products</h4>
+          <ProductTable products={products} />
+        </div>
+      ) : (
+        <Alert variant='primary'>
+          You currently aren't tracking any products.
+        </Alert>
+      )}
+    </Container>
+  );
+};
 
 export async function getServerSideProps() {
   let error = null;

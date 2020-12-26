@@ -3,6 +3,6 @@ export type DBProduct = {
   _id: string;
   url: string;
   nickname: string;
-  price?: number;
-  targetPrice: number;
+  price?: number;  // should be float
+  targetPrice: number;  // should be float
 };

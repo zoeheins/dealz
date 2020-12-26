@@ -1,17 +1,15 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import connectToDatabase from 'utils/connectToDatabase';
 import { DBProduct } from 'utils/types';
 
-import updateProductPrices from 'services/updateProductPrices';
+import getProductCollection from 'database/getProductCollection';
+import addProduct from 'database/addProduct';
+import getProductPrice from 'services/getProductPrice';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  // await updateProductPrices()  // update db with latest prices
-
   if (req.method === 'GET') {
     try {
-      const db = await connectToDatabase();
-      const collection = await db.collection('products');
+      const collection = await getProductCollection();
       const products: DBProduct[] = await collection.find({}).toArray();
       res.status(200).json({ products });
     } catch (err) {
@@ -22,6 +20,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   } else if (req.method === 'POST') {
     console.log('Got POST request with body:', req.body);
+
     const { name, url, targetPrice } = JSON.parse(req.body);
 
     if (!(name && url && targetPrice)) {
@@ -29,11 +28,15 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       res.end();
     } else {
       try {
-        const db = await connectToDatabase();
-        const collection = await db.collection('products');
-        collection.insert({ nickname: name, url, targetPrice });
-        res.status(200);
-        res.end();
+        const price = await getProductPrice(url);
+        if (price) {
+          addProduct(name, url, targetPrice, price);
+          res.status(200);
+          res.end();
+        } else {
+          res.status(500);
+          res.end();
+        }
       } catch (err) {
         console.log('Error adding product:', err);
         res.status(500);

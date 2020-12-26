@@ -1,0 +1,31 @@
+.nav-link {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.card {
+  margin-top: 100px;
+  margin-bottom: 20px;
+  width: 30%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-title {
+  font-size: 30px;
+  margin: 20px;
+}
+
+.card-subtitle li {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.alert {
+  margin-top: 10px;
+}
