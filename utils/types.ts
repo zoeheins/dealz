@@ -4,4 +4,5 @@ export type DBProduct = {
   url: string;
   nickname: string;
   price?: number;
+  targetPrice: number;
 };

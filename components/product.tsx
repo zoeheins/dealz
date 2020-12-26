@@ -7,14 +7,18 @@ interface ProductProps {
 }
 
 const ProductComponent: React.FC<ProductProps> = ({ product }) => {
-  const { nickname, price, url } = product;
+  const { nickname, price, url, targetPrice } = product;
   return (
-    <p>
-      <span>
-        <a href={url} target='_blank'>{nickname}</a>:{' '}
-        {price ? `$${price}` : 'couldnt find price'}{' '}
-      </span>
-    </p>
+    <tr>
+      <td>
+        <a href={url} target='_blank'>
+          {nickname}
+        </a>
+        :{' '}
+      </td>
+      <td>{price ? `$${price}` : 'couldnt find price'} </td>
+      <td>${targetPrice}</td>
+    </tr>
   );
 };
 

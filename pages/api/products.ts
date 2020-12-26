@@ -22,16 +22,16 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
   } else if (req.method === 'POST') {
     console.log('Got POST request with body:', req.body);
-    const { name, url } = JSON.parse(req.body);
+    const { name, url, targetPrice } = JSON.parse(req.body);
 
-    if (!(name && url)) {
+    if (!(name && url && targetPrice)) {
       res.status(400);
       res.end();
     } else {
       try {
         const db = await connectToDatabase();
         const collection = await db.collection('products');
-        collection.insert({ nickname: name, url });
+        collection.insert({ nickname: name, url, targetPrice });
         res.status(200);
         res.end();
       } catch (err) {

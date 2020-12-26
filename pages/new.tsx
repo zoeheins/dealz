@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 
 import { baseUrl } from 'utils/config';
 
@@ -7,6 +8,7 @@ const AddProductForm = () => {
   const router = useRouter();
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
+  const [targetPrice, setTargetPrice] = useState('');
   const [error, setError] = useState(null);
 
   const handleSubmit = async e => {
@@ -15,6 +17,7 @@ const AddProductForm = () => {
       method: 'POST',
       body: JSON.stringify({
         name,
+        targetPrice,
         url,
       }),
     });
@@ -27,6 +30,9 @@ const AddProductForm = () => {
 
   return (
     <div>
+      <button>
+        <Link href='/'>Home</Link>
+      </button>
       {error && <p>{error}</p>}
       <form onSubmit={handleSubmit}>
         <p>Track an Amazon product</p>
@@ -36,6 +42,7 @@ const AddProductForm = () => {
             type='text'
             value={name}
             onChange={e => setName(e.target.value)}
+            required
           />
         </label>
 
@@ -45,6 +52,17 @@ const AddProductForm = () => {
             type='text'
             value={url}
             onChange={e => setUrl(e.target.value)}
+            required
+          />
+        </label>
+
+        <label>
+          Target Price:
+          <input
+            type='text'  // change to number?
+            value={targetPrice}
+            onChange={e => setTargetPrice(e.target.value)}
+            required
           />
         </label>
 
